@@ -1,0 +1,85 @@
+﻿<mah:MetroWindow x:Class="DI.Proyecto.Clase._2024.Frontend.Dialogos.UsuarioCrear"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DI.Proyecto.Clase._2024.Frontend.Dialogos"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Icon="/Recursos/Iconos/matisse.png" Title="GESTIÓN ARTÍCULOS"  Height="700" Width="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="#444444">
+            <TextBlock  Grid.Row="0" Text="AÑADIR UN USUARIO" Foreground="White" FontSize="30" TextAlignment="Center" VerticalAlignment="Center" />
+        </Grid>
+
+        <StackPanel Grid.Row="1">
+            <TextBlock  Text="Datos Personales" FontStyle="Italic" Foreground="DodgerBlue" FontSize="20" Margin="30 30 0 0"/>
+            <Separator Margin="30 -5 30 0 "/>
+
+            <StackPanel Orientation="Horizontal" Margin="40 40 40 0">
+                <TextBox Margin="0 0 0 0" mat:HintAssist.Hint="Nombre" x:Name="txtNombre" FontWeight="bold" FontSize="15" Width="385" Padding="0 0 0 5" MaxLength="45"/>
+                <TextBox Margin="50 0 0 0" mat:HintAssist.Hint="Primer Apellido" x:Name="txtApellido1" FontWeight="Bold" FontSize="15" Width="385" Padding="0 0 0 5" MaxLength="45"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="40 40 40 0">
+                <TextBox Margin="0 0 0 0" mat:HintAssist.Hint="Segundo Apellido" x:Name="txtApellido2" FontWeight="bold" FontSize="15" Width="385" Padding="0 0 0 5" MaxLength="45"/>
+                <TextBox Margin="50 0 0 0" mat:HintAssist.Hint="Email" FontWeight="Bold" x:Name="txtEmail" FontSize="15" Width="385" Padding="0 0 0 5"/>
+            </StackPanel>
+            <TextBox mat:HintAssist.Hint="Domicilio" FontSize="15" x:Name="txtDomicilio" Margin="40 20 40 0" FontWeight="Bold" MaxLength="45"/>
+
+            <StackPanel Orientation="Horizontal" Margin="40 40 40 0">
+                <TextBox Margin="0 0 0 0" mat:HintAssist.Hint="Poblacion" x:Name="txtPoblacion" FontWeight="bold" FontSize="15" Width="385" Padding="0 0 0 5" MaxLength="45"/>
+                <TextBox Margin="50 0 0 0" mat:HintAssist.Hint="Telefono" x:Name="txtTelefono" FontWeight="bold" FontSize="15" Width="180" Padding="0 0 0 5" MaxLength="45"/>
+                <TextBox Margin="50 0 0 0" mat:HintAssist.Hint="Código Postal" x:Name="txtCp" FontWeight="bold" FontSize="15" Width="180" Padding="0 0 0 5" MaxLength="45"/>
+            </StackPanel>
+
+
+            <TextBlock  Text="Datos de Usuario" FontStyle="Italic" Foreground="DodgerBlue" FontSize="20" Margin="30 50 0 0"/>
+            <Separator Margin="30 -5 30 0 "/>
+
+            <Grid Margin="40 40 40 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" mat:HintAssist.Hint="Nombre de usuario" x:Name="txtNombreUser" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Width="180" Padding="0 0 0 5"/>
+                        <TextBox Grid.Column="1" mat:HintAssist.Hint="Contraseña" FontWeight="Bold" x:Name="txtContraseña" FontSize="15" HorizontalAlignment="Right" Width="180" Margin="20 0 0 0" Padding="0 0 0 5"/>
+                    </Grid>
+                    <ComboBox mat:HintAssist.Hint="Selecciona un rol de usuario" DisplayMemberPath="Nombre" x:Name="cbRolUser" FontSize="15" Margin="0 20 0 0" Padding="0 0 0 20" FontWeight="Bold"/>
+                </StackPanel>
+
+                <Grid HorizontalAlignment="Right" Margin="0 0 0 0" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+
+                    <ComboBox Grid.Row="0" mat:HintAssist.Hint="Selecciona un tipo de usuario" SelectionChanged="cbTipoUser_SelectionChanged"  DisplayMemberPath="Nombre" x:Name="cbTipoUser" FontSize="15" FontWeight="Bold" Margin="0 -20 0 0" Padding="0 0 0 25" VerticalAlignment="Top"  />
+                    <StackPanel Margin="0 40 0 20" Grid.Row="1" Orientation="Horizontal">
+                        <ComboBox Grid.Row="0" mat:HintAssist.Hint="Selecciona un departamento" IsEnabled="False" DisplayMemberPath="Nombre" x:Name="cbDepartamento" FontSize="15" FontWeight="Bold" Margin="0 -20 0 0" Padding="0 0 0 20" VerticalAlignment="Top" />
+                        <ComboBox Grid.Row="0" mat:HintAssist.Hint="Selecciona un grupo" DisplayMemberPath="Nombre" IsEnabled="False" FontSize="15" x:Name="cbGrupo" FontWeight="Bold" Margin="20 -20 0 0" Padding="0 0 0 20" VerticalAlignment="Top" />
+                    </StackPanel>
+                    <Button Grid.Row="2" Background="DodgerBlue" Content="Guardar" HorizontalAlignment="Left" Height="40" Width="100" BorderBrush="Transparent" x:Name="btnGuardar" Click="btnGuardar_Click"/>
+                    <Button Grid.Row="2" Background="Transparent" BorderBrush="DodgerBlue" Foreground="DodgerBlue" Height="40" Width="100" Content="Cancelar" HorizontalAlignment="Right" Margin="0 0 0 0" x:Name="btnCancelar" Click="btnCancelar_Click"/>
+
+
+                </Grid>
+            </Grid>
+        </StackPanel>
+
+
+    </Grid>
+</mah:MetroWindow>
