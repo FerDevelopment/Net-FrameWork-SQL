@@ -16,6 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using di.proyecto.clase.ribbon._2023.Backend.Servicios;
+using DI.Proyecto.Clase._2024.MVVM;
+using DI.Proyecto.Clase._2024.Frontend.ControlUsuario;
 
 namespace DI.Proyecto.Clase._2024.Frontend.Dialogos
 {
@@ -24,64 +26,45 @@ namespace DI.Proyecto.Clase._2024.Frontend.Dialogos
     /// </summary>
     public partial class UsuarioCrear : MetroWindow
     {
-        DiinventarioexamenContext contexto;
-        UsuarioServicio usuarioServicio;
-        ServicioGenerico<Tipousuario> tipoUsuarioServicio;
-        RolServicio rolServicio;
-        DptoServicio dptServicio;
-        GrupoServicio grupoServicio;
-        Usuario usu;
 
+        MVCrearUsuario mvCrearUsuario;
         public UsuarioCrear()
         {
             InitializeComponent();
         }
 
-        public UsuarioCrear(DiinventarioexamenContext context)
+        public UsuarioCrear(MVCrearUsuario mvc)
         {
+            mvCrearUsuario = mvc;
             InitializeComponent();
-            contexto = context;
-            Inicializa();
+            DataContext = mvCrearUsuario;
+            this.AddHandler(Validation.ErrorEvent, new RoutedEventHandler(mvCrearUsuario.OnErrorEvent));
+            mvCrearUsuario.btnGuardar = btnGuardar;
         }
 
-        private async void Inicializa()
-        {
-            usuarioServicio = new UsuarioServicio(contexto);
-            rolServicio = new RolServicio(contexto);
-            tipoUsuarioServicio = new ServicioGenerico<Tipousuario>(contexto);
-            dptServicio = new DptoServicio(contexto);
-            grupoServicio = new GrupoServicio(contexto);
-            usu = new Usuario();
 
-            cbTipoUser.ItemsSource = await tipoUsuarioServicio.GetAllAsync();
-            cbDepartamento.ItemsSource = await dptServicio.GetAllAsync();
-            cbGrupo.ItemsSource = await grupoServicio.GetAllAsync();
-            cbRolUser.ItemsSource = await rolServicio.GetAllAsync();
 
-        }
 
         private async void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
 
-            recogerDatos();
-
-            if (usuarioServicio.UsuarioUnico(usu.Username))
+            if (mvCrearUsuario.IsValid(this))
             {
-
-
-                if (await usuarioServicio.AddAsync(usu))
+                if (mvCrearUsuario.guarda)
                 {
-                    await this.ShowMessageAsync("Gestión de usuarios", "Usuario guardado correctamente");
+                    await this.ShowMessageAsync("Gestión crear" +
+                        " usuario", "El usuario " + mvCrearUsuario.usuario.Nombre + " se ha guardado correctamente");
                     DialogResult = true;
                 }
                 else
                 {
-                    await this.ShowMessageAsync("Gestión de usuarios", "ERROR!! PROBLEMAS AL INSERTAR EL USUARIO");
+                    await this.ShowMessageAsync("Gestión crear usuario", "ERROR!! ALGO NO CUADRA PILLIN");
+
                 }
             }
             else
             {
-                await this.ShowMessageAsync("Gestión de usuarios", "Nombre de usuario ya existente");
+                this.ShowMessageAsync("Gestión crear usuario", "Tienes campos obligatorios sin rellenar correctamente");
 
             }
         }
@@ -91,26 +74,6 @@ namespace DI.Proyecto.Clase._2024.Frontend.Dialogos
             this.Close();
         }
 
-        private void recogerDatos()
-        {
-
-            usu.Nombre = txtNombre.Text;
-            usu.Apellido1 = txtApellido1.Text;
-            usu.Apellido2 = txtApellido2.Text;
-            usu.Email = txtEmail.Text;
-            usu.Domicilio = txtDomicilio.Text;
-            usu.Poblacion = txtPoblacion.Text;
-            usu.Telefono = txtTelefono.Text;
-            usu.Codpostal = txtCp.Text;
-            usu.Username = txtNombreUser.Text;
-            usu.Password = txtContraseña.Text;
-
-            usu.RolNavigation = (Rol)cbRolUser.SelectedItem;
-            usu.TipoNavigation = (Tipousuario)cbTipoUser.SelectedItem;
-            usu.DepartamentoNavigation = (Departamento)cbDepartamento.SelectedItem;
-            usu.GrupoNavigation = (Grupo)cbGrupo.SelectedItem;
-
-        }
 
 
 

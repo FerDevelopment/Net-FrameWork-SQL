@@ -22,20 +22,20 @@
             <Separator Margin="30 -5 30 0 "/>
 
             <StackPanel Orientation="Horizontal" Margin="40 40 40 0">
-                <TextBox Margin="0 0 0 0" mat:HintAssist.Hint="Nombre" x:Name="txtNombre" FontWeight="bold" FontSize="15" Width="385" Padding="0 0 0 5" MaxLength="45"/>
-                <TextBox Margin="50 0 0 0" mat:HintAssist.Hint="Primer Apellido" x:Name="txtApellido1" FontWeight="Bold" FontSize="15" Width="385" Padding="0 0 0 5" MaxLength="45"/>
+                <TextBox Margin="0 0 0 0" Text="{Binding usuario.Nombre, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Nombre" x:Name="txtNombre" FontWeight="bold" FontSize="15" Width="385" Padding="0 0 0 5" MaxLength="45"/>
+                <TextBox Margin="50 0 0 0" Text="{Binding usuario.Apellido1, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Primer Apellido" x:Name="txtApellido1" FontWeight="Bold" FontSize="15" Width="385" Padding="0 0 0 5" MaxLength="45"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="40 40 40 0">
-                <TextBox Margin="0 0 0 0" mat:HintAssist.Hint="Segundo Apellido" x:Name="txtApellido2" FontWeight="bold" FontSize="15" Width="385" Padding="0 0 0 5" MaxLength="45"/>
-                <TextBox Margin="50 0 0 0" mat:HintAssist.Hint="Email" FontWeight="Bold" x:Name="txtEmail" FontSize="15" Width="385" Padding="0 0 0 5"/>
+                <TextBox Margin="0 0 0 0" Text="{Binding usuario.Apellido2, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Segundo Apellido" x:Name="txtApellido2" FontWeight="bold" FontSize="15" Width="385" Padding="0 0 0 5" MaxLength="45"/>
+                <TextBox Margin="50 0 0 0" Text="{Binding usuario.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Email" FontWeight="Bold" x:Name="txtEmail" FontSize="15" Width="385" Padding="0 0 0 5"/>
             </StackPanel>
             <TextBox mat:HintAssist.Hint="Domicilio" FontSize="15" x:Name="txtDomicilio" Margin="40 20 40 0" FontWeight="Bold" MaxLength="45"/>
 
             <StackPanel Orientation="Horizontal" Margin="40 40 40 0">
-                <TextBox Margin="0 0 0 0" mat:HintAssist.Hint="Poblacion" x:Name="txtPoblacion" FontWeight="bold" FontSize="15" Width="385" Padding="0 0 0 5" MaxLength="45"/>
-                <TextBox Margin="50 0 0 0" mat:HintAssist.Hint="Telefono" x:Name="txtTelefono" FontWeight="bold" FontSize="15" Width="180" Padding="0 0 0 5" MaxLength="45"/>
-                <TextBox Margin="50 0 0 0" mat:HintAssist.Hint="Código Postal" x:Name="txtCp" FontWeight="bold" FontSize="15" Width="180" Padding="0 0 0 5" MaxLength="45"/>
+                <TextBox Margin="0 0 0 0" Text="{Binding usuario.Poblacion, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Poblacion" x:Name="txtPoblacion" FontWeight="bold" FontSize="15" Width="385" Padding="0 0 0 5" MaxLength="45"/>
+                <TextBox Margin="50 0 0 0" Text="{Binding ususario.Telefono, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Telefono" x:Name="txtTelefono" FontWeight="bold" FontSize="15" Width="180" Padding="0 0 0 5" MaxLength="45"/>
+                <TextBox Margin="50 0 0 0" Text="{Binding usuaario.Codpostal, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Código Postal" x:Name="txtCp" FontWeight="bold" FontSize="15" Width="180" Padding="0 0 0 5" MaxLength="45"/>
             </StackPanel>
 
 
@@ -53,10 +53,10 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0" mat:HintAssist.Hint="Nombre de usuario" x:Name="txtNombreUser" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Width="180" Padding="0 0 0 5"/>
-                        <TextBox Grid.Column="1" mat:HintAssist.Hint="Contraseña" FontWeight="Bold" x:Name="txtContraseña" FontSize="15" HorizontalAlignment="Right" Width="180" Margin="20 0 0 0" Padding="0 0 0 5"/>
+                        <TextBox Grid.Column="0" Text="{Binding usuario.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Nombre de usuario" x:Name="txtNombreUser" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Width="180" Padding="0 0 0 5"/>
+                        <TextBox Grid.Column="1" Text="{Binding usuario.Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Contraseña" FontWeight="Bold" x:Name="txtContraseña" FontSize="15" HorizontalAlignment="Right" Width="180" Margin="20 0 0 0" Padding="0 0 0 5"/>
                     </Grid>
-                    <ComboBox mat:HintAssist.Hint="Selecciona un rol de usuario" DisplayMemberPath="Nombre" x:Name="cbRolUser" FontSize="15" Margin="0 20 0 0" Padding="0 0 0 20" FontWeight="Bold"/>
+                    <ComboBox mat:HintAssist.Hint="Selecciona un rol de usuario" SelectedItem="{Binding usuario.RolNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" DisplayMemberPath="Nombre" x:Name="cbRolUser" FontSize="15" Margin="0 20 0 0" Padding="0 0 0 20" FontWeight="Bold"/>
                 </StackPanel>
 
                 <Grid HorizontalAlignment="Right" Margin="0 0 0 0" Grid.Column="1">

@@ -26,6 +26,7 @@ namespace DI.Proyecto.Clase._2024
         private Usuario usuarioLogin;
         private MVModeloArticulo mvModeloArticulo;
         private MVCrearArticulo mvCrearArticulo;
+        private MVCrearUsuario mvCrearUsuario;
         public MainWindow()
         {
             InitializeComponent();
@@ -42,6 +43,7 @@ namespace DI.Proyecto.Clase._2024
         {
             mvModeloArticulo = new MVModeloArticulo(contexto);
             mvCrearArticulo = new MVCrearArticulo(contexto);
+            mvCrearUsuario = new MVCrearUsuario(contexto);
 
 
         }
@@ -68,7 +70,7 @@ namespace DI.Proyecto.Clase._2024
 
         private void crearUser_Click(object sender, RoutedEventArgs e)
         {
-            UsuarioCrear pantallaCrearUser = new UsuarioCrear(contexto);
+            UsuarioCrear pantallaCrearUser = new UsuarioCrear(mvCrearUsuario);
             pantallaCrearUser.ShowDialog();
         }
 
