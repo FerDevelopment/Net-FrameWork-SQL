@@ -92,5 +92,12 @@ namespace DI.Proyecto.Clase._2024
             panelPrincipal.Children.Clear();
             panelPrincipal.Children.Add(uc);
         }
+
+        private void btnListarUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            UCCrearUsuario uc = new UCCrearUsuario(mvCrearUsuario);
+            panelPrincipal.Children.Clear();
+            panelPrincipal.Children.Add(uc);
+        }
     }
 }

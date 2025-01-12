@@ -18,7 +18,6 @@
                         <DataTemplate >
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding GrupoNavigation.Nombre}"/>
-                                <TextBlock Text=" - "/>
                                 <TextBlock Text="{Binding DepartamentoNavigation.Nombre}"/>
                             </StackPanel>
                         </DataTemplate>

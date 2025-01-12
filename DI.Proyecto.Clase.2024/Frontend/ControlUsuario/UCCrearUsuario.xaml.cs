@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DI.Proyecto.Clase._2024.MVVM;
 
 namespace DI.Proyecto.Clase._2024.Frontend.ControlUsuario
 {
@@ -20,9 +21,18 @@ namespace DI.Proyecto.Clase._2024.Frontend.ControlUsuario
     /// </summary>
     public partial class UCCrearUsuario : UserControl
     {
+        MVCrearUsuario _mvCrearUsuario;
         public UCCrearUsuario()
         {
             InitializeComponent();
+        }
+
+        public UCCrearUsuario(MVCrearUsuario mv)
+        {
+            InitializeComponent();
+            _mvCrearUsuario = mv;
+            DataContext = _mvCrearUsuario;
+            
         }
     }
 }

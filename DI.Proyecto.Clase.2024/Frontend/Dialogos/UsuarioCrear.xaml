@@ -30,12 +30,12 @@
                 <TextBox Margin="0 0 0 0" Text="{Binding usuario.Apellido2, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Segundo Apellido" x:Name="txtApellido2" FontWeight="bold" FontSize="15" Width="385" Padding="0 0 0 5" MaxLength="45"/>
                 <TextBox Margin="50 0 0 0" Text="{Binding usuario.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Email" FontWeight="Bold" x:Name="txtEmail" FontSize="15" Width="385" Padding="0 0 0 5"/>
             </StackPanel>
-            <TextBox mat:HintAssist.Hint="Domicilio" FontSize="15" x:Name="txtDomicilio" Margin="40 20 40 0" FontWeight="Bold" MaxLength="45"/>
+            <TextBox mat:HintAssist.Hint="Domicilio" Text="{Binding usuario.Domicilio, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" FontSize="15" x:Name="txtDomicilio" Margin="40 20 40 0" FontWeight="Bold" MaxLength="45"/>
 
             <StackPanel Orientation="Horizontal" Margin="40 40 40 0">
                 <TextBox Margin="0 0 0 0" Text="{Binding usuario.Poblacion, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Poblacion" x:Name="txtPoblacion" FontWeight="bold" FontSize="15" Width="385" Padding="0 0 0 5" MaxLength="45"/>
-                <TextBox Margin="50 0 0 0" Text="{Binding ususario.Telefono, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Telefono" x:Name="txtTelefono" FontWeight="bold" FontSize="15" Width="180" Padding="0 0 0 5" MaxLength="45"/>
-                <TextBox Margin="50 0 0 0" Text="{Binding usuaario.Codpostal, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Código Postal" x:Name="txtCp" FontWeight="bold" FontSize="15" Width="180" Padding="0 0 0 5" MaxLength="45"/>
+                <TextBox Margin="50 0 0 0" Text="{Binding usuario.Telefono, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Telefono" x:Name="txtTelefono" FontWeight="bold" FontSize="15" Width="180" Padding="0 0 0 5" MaxLength="45"/>
+                <TextBox Margin="50 0 0 0" Text="{Binding usuario.Codpostal, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Código Postal" x:Name="txtCp" FontWeight="bold" FontSize="15" Width="180" Padding="0 0 0 5" MaxLength="45"/>
             </StackPanel>
 
 
@@ -56,7 +56,7 @@
                         <TextBox Grid.Column="0" Text="{Binding usuario.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Nombre de usuario" x:Name="txtNombreUser" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Width="180" Padding="0 0 0 5"/>
                         <TextBox Grid.Column="1" Text="{Binding usuario.Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Contraseña" FontWeight="Bold" x:Name="txtContraseña" FontSize="15" HorizontalAlignment="Right" Width="180" Margin="20 0 0 0" Padding="0 0 0 5"/>
                     </Grid>
-                    <ComboBox mat:HintAssist.Hint="Selecciona un rol de usuario" SelectedItem="{Binding usuario.RolNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" DisplayMemberPath="Nombre" x:Name="cbRolUser" FontSize="15" Margin="0 20 0 0" Padding="0 0 0 20" FontWeight="Bold"/>
+                    <ComboBox mat:HintAssist.Hint="Selecciona un rol de usuario" SelectedItem="{Binding usuario.RolNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" ItemsSource="{Binding listaRoles}" DisplayMemberPath="Nombre" x:Name="cbRolUser" FontSize="15" Margin="0 20 0 0" Padding="0 0 0 20" FontWeight="Bold"/>
                 </StackPanel>
 
                 <Grid HorizontalAlignment="Right" Margin="0 0 0 0" Grid.Column="1">
@@ -67,10 +67,11 @@
                     </Grid.RowDefinitions>
 
 
-                    <ComboBox Grid.Row="0" mat:HintAssist.Hint="Selecciona un tipo de usuario" SelectionChanged="cbTipoUser_SelectionChanged"  DisplayMemberPath="Nombre" x:Name="cbTipoUser" FontSize="15" FontWeight="Bold" Margin="0 -20 0 0" Padding="0 0 0 25" VerticalAlignment="Top"  />
+                    <ComboBox Grid.Row="0" mat:HintAssist.Hint="Selecciona un tipo de usuario" SelectionChanged="cbTipoUser_SelectionChanged" SelectedItem="{Binding usuario.TipoNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" ItemsSource="{Binding listaTipos}"   DisplayMemberPath="Nombre" x:Name="cbTipoUser" FontSize="15" FontWeight="Bold" Margin="0 -20 0 0" Padding="0 0 0 25" VerticalAlignment="Top"  />
                     <StackPanel Margin="0 40 0 20" Grid.Row="1" Orientation="Horizontal">
-                        <ComboBox Grid.Row="0" mat:HintAssist.Hint="Selecciona un departamento" IsEnabled="False" DisplayMemberPath="Nombre" x:Name="cbDepartamento" FontSize="15" FontWeight="Bold" Margin="0 -20 0 0" Padding="0 0 0 20" VerticalAlignment="Top" />
-                        <ComboBox Grid.Row="0" mat:HintAssist.Hint="Selecciona un grupo" DisplayMemberPath="Nombre" IsEnabled="False" FontSize="15" x:Name="cbGrupo" FontWeight="Bold" Margin="20 -20 0 0" Padding="0 0 0 20" VerticalAlignment="Top" />
+                        <ComboBox Grid.Row="0" mat:HintAssist.Hint="Selecciona un departamento" IsEnabled="False" SelectedItem="{Binding usuario.DepartamentoNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" ItemsSource="{Binding listaDepartamentos}" DisplayMemberPath="Nombre" x:Name="cbDepartamento" FontSize="15" FontWeight="Bold" Margin="0 -20 0 0" Padding="0 0 0 20" VerticalAlignment="Top" />
+
+                        <ComboBox Grid.Row="0" mat:HintAssist.Hint="Selecciona un grupo" DisplayMemberPath="Nombre" IsEnabled="False" SelectedItem="{Binding usuario.GrupoNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" ItemsSource="{Binding listaGrupos}" FontSize="15" x:Name="cbGrupo" FontWeight="Bold" Margin="20 -20 0 0" Padding="0 0 0 20" VerticalAlignment="Top" />
                     </StackPanel>
                     <Button Grid.Row="2" Background="DodgerBlue" Content="Guardar" HorizontalAlignment="Left" Height="40" Width="100" BorderBrush="Transparent" x:Name="btnGuardar" Click="btnGuardar_Click"/>
                     <Button Grid.Row="2" Background="Transparent" BorderBrush="DodgerBlue" Foreground="DodgerBlue" Height="40" Width="100" Content="Cancelar" HorizontalAlignment="Right" Margin="0 0 0 0" x:Name="btnCancelar" Click="btnCancelar_Click"/>

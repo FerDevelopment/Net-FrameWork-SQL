@@ -93,7 +93,7 @@
                                 <mat:PackIcon Kind="UserEdit"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="Lista" >
+                        <MenuItem Header="Lista" x:Name="btnListarUsuarios" Click="btnListarUsuarios_Click" >
                             <MenuItem.Icon>
                                 <mat:PackIcon Kind="ListBoxOutline"/>
                             </MenuItem.Icon>
