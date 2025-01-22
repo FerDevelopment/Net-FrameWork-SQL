@@ -1,10 +1,12 @@
 ﻿using di.proyecto.clase._2024.Backend.Servicios;
 using di.proyecto.clase._2024.MVVM.Base;
 using DI.Proyecto.Clase._2024.Backend.Modelo;
+using Mysqlx.Cursor;
+using System;
 
 namespace DI.Proyecto.Clase._2024.MVVM
 {
-    public class MVCrearArticulo: MVBaseCRUD<Articulo>
+    public class MVArticulo: MVBaseCRUD<Articulo>
     {
         private DiinventarioexamenContext contexto;
         private Articulo articulo;
@@ -13,7 +15,7 @@ namespace DI.Proyecto.Clase._2024.MVVM
         private DptoServicio dptoServicio;
         private UsuarioServicio usuarioServicio;
         private EspacioServicio espacioServicio;
-        private List<String> estados = new List<string> { "Operativo", "Obsoleto", "Mantenimiento" };
+        private List<String> estados = new List<string> { "operativo", "obsoleto", "mantenimiento" };
 
         public IEnumerable<Modeloarticulo> listaModelos { get { return Task.Run(modeloArticuloServicio.GetAllAsync).Result; } }
         public IEnumerable<Departamento> listaDepartamentos { get { return Task.Run(dptoServicio.GetAllAsync).Result; } }
@@ -28,9 +30,20 @@ namespace DI.Proyecto.Clase._2024.MVVM
             get { return articulo; }
             set { articulo = value; OnPropertyChanged(nameof(crearArticulo)); }
         }
-        public bool guarda { get { return Task.Run(() => Add(crearArticulo)).Result; } }
 
-        public MVCrearArticulo(DiinventarioexamenContext context)
+        
+        public ArticuloServicio artserv
+        {
+            get { return articuloServicio; }
+            set { articuloServicio = value; OnPropertyChanged(nameof(artserv)); }
+        }
+
+        public Articulo Clonar {  get { return (Articulo)articulo.Clone(); } }
+
+        public bool guarda { get { return Task.Run(() => Update(crearArticulo)).Result; } }
+
+        public bool borrar { get  { return Task.Run(() => Delete(crearArticulo)).Result; } }
+        public MVArticulo(DiinventarioexamenContext context)
 
         {
             contexto = context;
@@ -39,14 +52,16 @@ namespace DI.Proyecto.Clase._2024.MVVM
 
         public void Inicializa()
         {
-            
             dptoServicio = new DptoServicio(contexto);
             espacioServicio = new EspacioServicio(contexto);
             usuarioServicio = new UsuarioServicio(contexto);
             modeloArticuloServicio = new ModeloArticuloServicio(contexto);
             articuloServicio = new ArticuloServicio(contexto);
             articulo = new Articulo();
+            articulo.Fechaalta = DateTime.Now;
             servicio = articuloServicio;
+            
+
         }
 
     }

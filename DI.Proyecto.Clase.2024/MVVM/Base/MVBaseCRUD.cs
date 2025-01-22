@@ -16,18 +16,7 @@ namespace di.proyecto.clase._2024.MVVM.Base
         /// <returns></returns>
         public async Task<bool> Add(T entity)
         {
-            bool correcto = true;
-            try
-            {
-                await servicio.AddAsync(entity);
-            }
-            catch (DbUpdateException dbex)
-            {
-                correcto = false;
-                // Guardamos en el Log el error
-                log.Error("\n" + "Insertando un nuevo objeto ..." + entity.GetType() + "\n" + dbex.Message + "\n" + dbex.StackTrace);
-            }
-            return correcto;
+            return await servicio.AddAsync(entity);
         }
         /// <summary>
         /// Realiza una actualización de una tupla de la base de datos
@@ -36,18 +25,7 @@ namespace di.proyecto.clase._2024.MVVM.Base
         /// <returns></returns>
         public async Task<bool> Update(T entity)
         {
-            bool correcto = true;
-            try
-            {
-                await servicio.UpdateAsync(entity);
-            }
-            catch (DbUpdateException dbex)
-            {
-                correcto = false;
-                // Guardamos en el Log el error
-                log.Error("\n" + "Insertando un nuevo objeto ..." + entity.GetType() + "\n" + dbex.Message + "\n" + dbex.StackTrace);
-            }
-            return correcto;
+            return await servicio.UpdateAsync(entity);
         }
         /// <summary>
         /// Borra una fila de la tabla correspondiente
@@ -56,18 +34,7 @@ namespace di.proyecto.clase._2024.MVVM.Base
         /// <returns></returns>
         public async Task<bool> Delete(T entity)
         {
-            bool correcto = true;
-            try
-            {
-                await servicio.DeleteAsync(entity);
-            }
-            catch (DbUpdateException dbex)
-            {
-                correcto = false;
-                // Guardamos en el Log el error
-                log.Error("\n" + "Insertando un nuevo objeto ..." + entity.GetType() + "\n" + dbex.Message + "\n" + dbex.StackTrace);
-            }
-            return correcto;
+            return await servicio.DeleteAsync(entity);
         }
     }
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DI.Proyecto.Clase._2024.MVVM
 {
-    public class MVCrearUsuario : MVBaseCRUD<Usuario>
+    public class MVUsuario : MVBaseCRUD<Usuario>
     {
         private DiinventarioexamenContext contexto;
         private UsuarioServicio usuarioServicio;
@@ -33,9 +33,10 @@ namespace DI.Proyecto.Clase._2024.MVVM
             set { usu = value; OnPropertyChanged(nameof(usuario)); }
         }
 
-        public bool guarda { get { return Task.Run(() => Add(usuario)).Result; } }
+        public bool guarda { get { return Task.Run(() => Update(usuario)).Result; } }
+        public bool borrar { get { return Task.Run(() => Delete(usuario)).Result; } }
 
-        public MVCrearUsuario(DiinventarioexamenContext context)
+        public MVUsuario(DiinventarioexamenContext context)
 
         {
             contexto = context;

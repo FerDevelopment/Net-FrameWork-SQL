@@ -24,30 +24,36 @@
 
             <StackPanel Orientation="Horizontal" Margin="60 20 60 0">
                 <ComboBox SelectedItem="{Binding crearArticulo.ModeloNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" Margin="0 0 0 0" mat:HintAssist.Hint="Selecciona un modelo*" ItemsSource="{Binding listaModelos}" DisplayMemberPath="Nombre"  x:Name="cbModelo" FontWeight="bold" FontSize="20" Width="360" Padding="0 0 0 5"/>
-                
-                <DatePicker Margin="60 0 0 0" SelectedDate="{Binding modeloArticulo.Fechaalta, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Selecciona una fecha" x:Name="fecha" FontSize="20" Width="360" Padding="0 0 0 5"  />
+
+                <DatePicker Margin="60 0 0 0" SelectedDate="{Binding crearArticulo.Fechaalta, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Selecciona una fecha" x:Name="fecha" FontSize="20" Width="360" Padding="0 0 0 5"  />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="60 20 60 0" >
-                <ComboBox Margin="0 0 0 0" SelectedItem="{Binding modeloArticulo.Estado, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" ItemsSource="{Binding listaEstados}"  mat:HintAssist.Hint="Selecciona un estado"  x:Name="cbEstado" FontSize="20" Width="360" Padding="0 0 0 5"/>
-                
-                <ComboBox Margin="60 0 0 0" SelectedItem="{Binding modeloArticulo.UsuarioaltaNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" ItemsSource="{Binding listaUsuarios}" mat:HintAssist.Hint="Selecciona un usuario*" DisplayMemberPath="Nombre"  x:Name="cbUsuario" FontSize="20" Width="360" Padding="0 0 0 5"/>
+                <ComboBox Margin="0 0 0 0" SelectedItem="{Binding crearArticulo.Estado, ValidatesOnDataErrors=True,NotifyOnValidationError=True}"  ItemsSource="{Binding listaEstados}"  mat:HintAssist.Hint="Selecciona un estado" x:Name="cbEstado" FontSize="20" Width="360" Padding="0 0 0 5"/>
+
+                <ComboBox Margin="60 0 0 0" SelectedItem="{Binding crearArticulo.UsuarioaltaNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" ItemsSource="{Binding listaUsuarios}" mat:HintAssist.Hint="Selecciona un usuario*" DisplayMemberPath="Nombre"  x:Name="cbUsuario" FontSize="20" Width="360" Padding="0 0 0 5"/>
             </StackPanel>
-            <TextBox mat:HintAssist.Hint="Numero de Serie* (Debe de ser único)" Text="{Binding modeloArticulo.Numserie, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" x:Name="numSerie" FontSize="20" Margin="60 20 60 0" FontWeight="Bold" MaxLength="45"/>
+            <TextBox mat:HintAssist.Hint="Numero de Serie* (Debe de ser único)" Text="{Binding crearArticulo.Numserie, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" x:Name="numSerie" FontSize="20" Margin="60 20 60 0" FontWeight="Bold" MaxLength="45"/>
 
             <TextBlock  Text="UBICACIÓN" FontStyle="Italic" Foreground="DodgerBlue" FontSize="30" Margin="30 50 0 0"/>
             <Separator Margin="15 -5 15 0 "/>
 
             <StackPanel Orientation="Horizontal" Margin="60 20 60 0" >
-                <ComboBox Margin="0 0 0 0" SelectedItem="{Binding modeloArticulo.DepartamentoNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged,  NotifyOnValidationError=True}" mat:HintAssist.Hint="Selecciona un departamento*" DisplayMemberPath="Nombre" ItemsSource="{Binding listaDepartamentos}" x:Name="cbDepartamentos" FontWeight="Bold"  FontSize="20" Width="360" Padding="0 0 0 5"/>
+                <ComboBox Margin="0 0 0 0" SelectedItem="{Binding crearArticulo.DepartamentoNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged,  NotifyOnValidationError=True}" mat:HintAssist.Hint="Selecciona un departamento*" DisplayMemberPath="Nombre" ItemsSource="{Binding listaDepartamentos}" x:Name="cbDepartamentos" FontWeight="Bold"  FontSize="20" Width="360" Padding="0 0 0 5"/>
 
-                <ComboBox Margin="60 0 0 0"  SelectedItem="{Binding modeloArticulo.EspacioNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Selecciona un espacio*" DisplayMemberPath="Nombre" x:Name="cbEspacio" ItemsSource="{Binding listaArmarios}" FontWeight="Bold" FontSize="20" Width="360" Padding="0 0 0 5"/>
+                <ComboBox Margin="60 0 0 0"  SelectedItem="{Binding crearArticulo.EspacioNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" mat:HintAssist.Hint="Selecciona un espacio*" DisplayMemberPath="Nombre" x:Name="cbEspacio" ItemsSource="{Binding listaEspacios}" FontWeight="Bold" FontSize="20" Width="360" Padding="0 0 0 5"/>
+                
             </StackPanel>
-            <ComboBox Margin="60 15 60 0" mat:HintAssist.Hint="Selecciona un armario*" SelectedItem="{Binding modeloArticulo.DentrodeNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"  DisplayMemberPath="ModeloArticulo.Nombre" x:Name="cbArmario" FontWeight="Bold" FontSize="20"  Padding="0 0 0 5"/>
-            <TextBox mat:HintAssist.Hint="Observaciones" Text="{Binding modeloArticulo.Observaciones, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" x:Name="observaciones" Foreground="Gray" FontSize="20" Margin="60 20 60 0" />
+            <ComboBox Margin="60 15 60 0" mat:HintAssist.Hint="Selecciona un armario*" SelectedItem="{Binding crearArticulo.DentrodeNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" ItemsSource="{Binding listaArmarios}" DisplayMemberPath="ModeloNavigation.Nombre" x:Name="cbArmario" FontWeight="Bold" FontSize="20" Padding="0 0 0 5" Foreground="White"/>
+            
+            <TextBox mat:HintAssist.Hint="Observaciones" Text="{Binding crearArticulo.Observaciones, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" x:Name="observaciones" Foreground="Gray" FontSize="20" Margin="60 20 60 0" />
+            
             <Grid HorizontalAlignment="Right" Margin="0 30 0 0">
+                
                 <Button Background="DodgerBlue" Content="Cancelar" Margin="0 0 200 0" Height="40" Width="100" BorderBrush="Transparent" x:Name="btnCancelar" Click="btnCancelar_Click"/>
-                <Button Background="Transparent" BorderBrush="DodgerBlue" Foreground="DodgerBlue" Height="40" Width="100" Content="Guardar" HorizontalAlignment="Right" Margin="0 0 60 0" x:Name="btnGuardar" Click="btnGuardar_Click"/>
+                
+                <Button Background="Transparent" BorderBrush="DodgerBlue" Foreground="DodgerBlue" Height="40" Width="100" Content="Guardar" HorizontalAlignment="Right" Margin="0 0 60 0" x:Name="btnGuardar" Click="btnGuardar_Click" IsDefault="True"/>
+                
             </Grid>
         </StackPanel>
 

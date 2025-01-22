@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using di.proyecto.clase._2024.MVVM.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace DI.Proyecto.Clase._2024.Backend.Modelo;
@@ -13,7 +14,7 @@ namespace DI.Proyecto.Clase._2024.Backend.Modelo;
 [Index("Modelo", Name = "fk_modelos_articulo_idx")]
 [Index("Usuarioalta", Name = "fk_usuarioalta_articulo_idx")]
 [Index("Usuariobaja", Name = "fk_usuariobaja_modeloarticulo_idx")]
-public partial class Articulo
+public partial class Articulo : PropertyChangedDataError
 {
     [Key]
     [Column("idarticulo")]

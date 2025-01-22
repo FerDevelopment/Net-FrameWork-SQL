@@ -60,7 +60,7 @@ Margin="0,10,0,0" Style="{StaticResource MaterialDesignOutlinedTextBox}" mat:Tex
         <ComboBox Grid.Row="2" Grid.ColumnSpan="2" SelectedItem="{Binding modeloArticulo.TipoNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"  x:Name="cbTipoArticulo" ItemsSource="{Binding listaTipos}" mat:HintAssist.Hint="Tipo" FontSize="20" HorizontalAlignment="Center" Width="700" DisplayMemberPath="Nombre" />
 
 
-        <Button Grid.Column="1"  Grid.Row="3" Width="200" Height="60" x:Name="btnGuardar" Click="btnGuardar_Click" Content="Guardar" BorderBrush="Transparent"/>
+        <Button Grid.Column="1"  Grid.Row="3" Width="200" Height="60" x:Name="btnGuardar" Click="btnGuardar_Click" Content="Guardar" BorderBrush="Transparent" IsDefault="True"/>
         <Button Grid.Column="0"  Grid.Row="3" Width="200" Height="60" x:Name="btnCancelar" Click="btnCancelar_Click" Content="Cancelar" Background="Transparent" />
 
     </Grid>

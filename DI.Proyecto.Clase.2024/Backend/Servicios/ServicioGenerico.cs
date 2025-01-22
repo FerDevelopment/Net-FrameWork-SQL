@@ -124,9 +124,8 @@ namespace di.proyecto.clase._2024.Backend.Servicios
             try
             {
                 // Realizamos el update
-                _dbSet.Attach(entity);
+                _dbSet.Update(entity);
                 // Finalizamos la transacción
-                _context.Entry(entity).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
                 // Guardamos la información en el Log
                 logger.Info("Entidad actualizada con éxito.");

@@ -50,5 +50,10 @@ namespace di.proyecto.clase._2024.MVVM.Base
         }
 
         #endregion
+
+        public PropertyChangedDataError Clone()
+        {
+            return MemberwiseClone() as PropertyChangedDataError;
+        }
     }
 }

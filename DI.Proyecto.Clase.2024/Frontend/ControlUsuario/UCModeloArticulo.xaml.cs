@@ -1,4 +1,7 @@
-﻿using DI.Proyecto.Clase._2024.MVVM;
+﻿using Castle.Components.DictionaryAdapter.Xml;
+using DI.Proyecto.Clase._2024.Backend.Modelo;
+using DI.Proyecto.Clase._2024.Frontend.Dialogos;
+using DI.Proyecto.Clase._2024.MVVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +25,7 @@ namespace DI.Proyecto.Clase._2024.Frontend.ControlUsuario
     public partial class UCModeloArticulo : UserControl
     {
         private MVModeloArticulo _mvModeloArticulo;
+        
         public UCModeloArticulo()
         {
             InitializeComponent();
@@ -32,6 +36,25 @@ namespace DI.Proyecto.Clase._2024.Frontend.ControlUsuario
             InitializeComponent();
             _mvModeloArticulo = mv;
             DataContext = _mvModeloArticulo;
+        }
+
+        private void mItemEditar_Click(object sender, RoutedEventArgs e)
+        {
+            _mvModeloArticulo.modeloArticulo = (Backend.Modelo.Modeloarticulo)dgModeloArticulo.SelectedItem;
+            DialogoModeloArticuloMVVM dialogoModeloArticuloMVVM = new DialogoModeloArticuloMVVM(_mvModeloArticulo);
+            dialogoModeloArticuloMVVM.ShowDialog();
+
+            if (dialogoModeloArticuloMVVM.DialogResult.Equals(true))
+            {
+                dgModeloArticulo.Items.Refresh();
+                _mvModeloArticulo.modeloArticulo = new Modeloarticulo();
+                
+            }
+        }
+
+        private void cbTipoArticulo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

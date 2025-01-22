@@ -68,12 +68,15 @@
 
 
                     <ComboBox Grid.Row="0" mat:HintAssist.Hint="Selecciona un tipo de usuario" SelectionChanged="cbTipoUser_SelectionChanged" SelectedItem="{Binding usuario.TipoNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" ItemsSource="{Binding listaTipos}"   DisplayMemberPath="Nombre" x:Name="cbTipoUser" FontSize="15" FontWeight="Bold" Margin="0 -20 0 0" Padding="0 0 0 25" VerticalAlignment="Top"  />
+                    
                     <StackPanel Margin="0 40 0 20" Grid.Row="1" Orientation="Horizontal">
+                        
                         <ComboBox Grid.Row="0" mat:HintAssist.Hint="Selecciona un departamento" IsEnabled="False" SelectedItem="{Binding usuario.DepartamentoNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" ItemsSource="{Binding listaDepartamentos}" DisplayMemberPath="Nombre" x:Name="cbDepartamento" FontSize="15" FontWeight="Bold" Margin="0 -20 0 0" Padding="0 0 0 20" VerticalAlignment="Top" />
 
                         <ComboBox Grid.Row="0" mat:HintAssist.Hint="Selecciona un grupo" DisplayMemberPath="Nombre" IsEnabled="False" SelectedItem="{Binding usuario.GrupoNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" ItemsSource="{Binding listaGrupos}" FontSize="15" x:Name="cbGrupo" FontWeight="Bold" Margin="20 -20 0 0" Padding="0 0 0 20" VerticalAlignment="Top" />
+                        
                     </StackPanel>
-                    <Button Grid.Row="2" Background="DodgerBlue" Content="Guardar" HorizontalAlignment="Left" Height="40" Width="100" BorderBrush="Transparent" x:Name="btnGuardar" Click="btnGuardar_Click"/>
+                    <Button Grid.Row="2" Background="DodgerBlue" Content="Guardar" HorizontalAlignment="Left" Height="40" Width="100" BorderBrush="Transparent" x:Name="btnGuardar" Click="btnGuardar_Click" IsDefault="True"/>
                     <Button Grid.Row="2" Background="Transparent" BorderBrush="DodgerBlue" Foreground="DodgerBlue" Height="40" Width="100" Content="Cancelar" HorizontalAlignment="Right" Margin="0 0 0 0" x:Name="btnCancelar" Click="btnCancelar_Click"/>
 
 

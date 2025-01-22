@@ -26,19 +26,20 @@ namespace DI.Proyecto.Clase._2024.Frontend.Dialogos
     /// </summary>
     public partial class UsuarioCrear : MetroWindow
     {
-
-        MVCrearUsuario mvCrearUsuario;
+        private Boolean SelectionChanged = true;
+        MVUsuario mvCrearUsuario;
         public UsuarioCrear()
         {
             InitializeComponent();
         }
 
-        public UsuarioCrear(MVCrearUsuario mvc)
+        public UsuarioCrear(MVUsuario mvc)
         {
+            SelectionChanged = true;
             mvCrearUsuario = mvc;
             InitializeComponent();
             DataContext = mvCrearUsuario;
-            this.AddHandler(Validation.ErrorEvent, new RoutedEventHandler(mvCrearUsuario.OnErrorEvent));
+            //this.AddHandler(Validation.ErrorEvent, new RoutedEventHandler(mvCrearUsuario.OnErrorEvent));
             mvCrearUsuario.btnGuardar = btnGuardar;
         }
 
@@ -54,7 +55,9 @@ namespace DI.Proyecto.Clase._2024.Frontend.Dialogos
                 {
                     await this.ShowMessageAsync("Gestión crear" +
                         " usuario", "El usuario " + mvCrearUsuario.usuario.Nombre + " se ha guardado correctamente");
+                    SelectionChanged = false;
                     DialogResult = true;
+                    mvCrearUsuario.usuario = new Usuario();
                 }
                 else
                 {
@@ -71,31 +74,43 @@ namespace DI.Proyecto.Clase._2024.Frontend.Dialogos
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            SelectionChanged = false;
+            DialogResult = false;
+            mvCrearUsuario.usuario = new Usuario();
+
         }
 
+        protected override void OnClosed(EventArgs e)
+        {
+            SelectionChanged = false;
+            mvCrearUsuario.usuario = new Usuario();
+            base.OnClosed(e);
+        }
 
 
 
         private void cbTipoUser_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            String tipoUsu = ((Tipousuario)cbTipoUser.SelectedItem).Nombre;
-            if (tipoUsu.Equals("Alumno"))
+            if (SelectionChanged)
             {
-                cbGrupo.IsEnabled = true;
-                cbDepartamento.IsEnabled = false;
+                String tipoUsu = ((Tipousuario)cbTipoUser.SelectedItem).Nombre;
+                if (tipoUsu.Equals("Alumno"))
+                {
+                    cbGrupo.IsEnabled = true;
+                    cbDepartamento.IsEnabled = false;
 
-            }
-            else if (tipoUsu.Equals("Profesor"))
-            {
-                cbDepartamento.IsEnabled = true;
-                cbGrupo.IsEnabled = false;
+                }
+                else if (tipoUsu.Equals("Profesor"))
+                {
+                    cbDepartamento.IsEnabled = true;
+                    cbGrupo.IsEnabled = false;
 
-            }
-            else
-            {
-                cbGrupo.IsEnabled = false;
-                cbDepartamento.IsEnabled = false;
+                }
+                else
+                {
+                    cbGrupo.IsEnabled = false;
+                    cbDepartamento.IsEnabled = false;
+                }
             }
         }
     }

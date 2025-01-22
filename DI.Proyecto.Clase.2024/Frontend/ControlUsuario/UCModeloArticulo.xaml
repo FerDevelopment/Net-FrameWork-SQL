@@ -8,29 +8,42 @@
              xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <!-- el canuseraddrows es si queremos que al final de la tabla pueda añadir filas-->
-        <DataGrid x:Name="dgModeloArticulo" ItemsSource="{Binding listaModelos}" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="True" >
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Listado de modelos de articulo" Margin="20" FontSize="20"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <TextBlock Text="Flitrado por Tipo" Margin="20 10 10 10"  VerticalAlignment="Center"/>
+                <ComboBox x:Name="cbTipoArticulo" Style="{StaticResource MaterialDesignFilledComboBox}" mat:HintAssist.Hint="--Seleccina un tipo--" Margin="10" ItemsSource="{Binding listaTipos}" DisplayMemberPath="nombre" SelectionChanged="cbTipoArticulo_SelectionChanged" SelectedItem="{Binding tipoSeleccionado}"/>
+            </StackPanel>
+        </Grid>
 
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombre del modelo" Binding="{Binding Nombre}" />
-                <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}"/>
-                <DataGridTextColumn Header="Marca" Binding="{Binding Marca}"/>
-                <DataGridTextColumn Header="Tipo" Binding="{Binding TipoNavigation.Nombre}"/>
+        <Grid>
+            <!-- el canuseraddrows es si queremos que al final de la tabla pueda añadir filas-->
+            <DataGrid x:Name="dgModeloArticulo" ItemsSource="{Binding listaModelos}" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="True" IsReadOnly="True" >
 
-                <DataGridTemplateColumn Header="Editar - Borrar">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nombre del modelo" Binding="{Binding Nombre}" />
+                    <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}"/>
+                    <DataGridTextColumn Header="Marca" Binding="{Binding Marca}"/>
+                    <DataGridTextColumn Header="Tipo" Binding="{Binding TipoNavigation.Nombre}"/>
 
-                            <StackPanel Orientation="Horizontal">
-                                <Button Content="{mat:PackIcon Kind=Edit}" Foreground="DodgerBlue" Style="{StaticResource MaterialDesignToolButton}"/>
-                                <Button Content="{mat:PackIcon Kind=Delete}" Foreground="Red" Style="{StaticResource MaterialDesignToolButton}"/>
-                            </StackPanel>
+                    <DataGridTemplateColumn Header="Editar - Borrar">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
 
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <!--
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="{mat:PackIcon Kind=Edit}"  x:Name="mItemEditar" Click="mItemEditar_Click" Foreground="DodgerBlue" Style="{StaticResource MaterialDesignToolButton}"/>
+                                    <Button Content="{mat:PackIcon Kind=Delete}" Foreground="Red" Style="{StaticResource MaterialDesignToolButton}"/>
+                                </StackPanel>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!--
                 <DataGridTemplateColumn Header="Marca y modelo">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -45,23 +58,24 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 -->
-            </DataGrid.Columns>
+                </DataGrid.Columns>
 
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Editar">
-                        <MenuItem.Icon>
-                            <mat:PackIcon Kind="Edit" Foreground="DodgerBlue"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Editar" x:Name="mItemEditar" Click="mItemEditar_Click">
+                            <MenuItem.Icon>
+                                <mat:PackIcon Kind="Edit" Foreground="DodgerBlue"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
 
-                    <MenuItem Header="Borrar">
-                        <MenuItem.Icon>
-                            <mat:PackIcon Kind="Delete" Foreground="Red"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                </ContextMenu>
-            </DataGrid.ContextMenu>
-        </DataGrid>
-    </Grid>
+                        <MenuItem Header="Borrar">
+                            <MenuItem.Icon>
+                                <mat:PackIcon Kind="Delete" Foreground="Red"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+        </Grid>
+    </DockPanel>
 </UserControl>

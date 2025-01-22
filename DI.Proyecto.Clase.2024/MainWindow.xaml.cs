@@ -25,12 +25,10 @@ namespace DI.Proyecto.Clase._2024
         private DiinventarioexamenContext contexto;
         private Usuario usuarioLogin;
         private MVModeloArticulo mvModeloArticulo;
-        private MVCrearArticulo mvCrearArticulo;
-        private MVCrearUsuario mvCrearUsuario;
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        private MVArticulo mvCrearArticulo;
+        private MVUsuario mvCrearUsuario;
+   
+
         public MainWindow(DiinventarioexamenContext context, Usuario usu)
         {
             InitializeComponent();
@@ -42,8 +40,8 @@ namespace DI.Proyecto.Clase._2024
         public void Inicializa()
         {
             mvModeloArticulo = new MVModeloArticulo(contexto);
-            mvCrearArticulo = new MVCrearArticulo(contexto);
-            mvCrearUsuario = new MVCrearUsuario(contexto);
+            mvCrearArticulo = new MVArticulo(contexto);
+            mvCrearUsuario = new MVUsuario(contexto);
 
 
         }
@@ -58,7 +56,7 @@ namespace DI.Proyecto.Clase._2024
 
         private void btnCrearArticulo_Click(object sender, RoutedEventArgs e)
         {
-            ArticuloCrear ac = new ArticuloCrear(mvCrearArticulo);
+            ArticuloCrear ac = new ArticuloCrear(mvCrearArticulo, false);
             ac.ShowDialog();
         }
 
@@ -88,14 +86,14 @@ namespace DI.Proyecto.Clase._2024
 
         private void btnListarArticulos_Click(object sender, RoutedEventArgs e)
         {
-            UCCrearArticulo uc = new UCCrearArticulo(mvCrearArticulo);
+            UCArticulo uc = new UCArticulo(mvCrearArticulo);
             panelPrincipal.Children.Clear();
             panelPrincipal.Children.Add(uc);
         }
 
         private void btnListarUsuarios_Click(object sender, RoutedEventArgs e)
         {
-            UCCrearUsuario uc = new UCCrearUsuario(mvCrearUsuario);
+            UCUsuario uc = new UCUsuario(mvCrearUsuario);
             panelPrincipal.Children.Clear();
             panelPrincipal.Children.Add(uc);
         }
