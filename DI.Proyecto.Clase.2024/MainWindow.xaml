@@ -183,8 +183,7 @@
                     <mat:PackIcon Kind="ViewList" />
                 </Button>
                 <Separator/>
-                <TextBlock Text="Busca un artículo" VerticalAlignment="Center" Padding="15 0 0 0"/>
-                <TextBox Width="150" BorderThickness="1"/>
+
             </ToolBar>
 
         </Grid>

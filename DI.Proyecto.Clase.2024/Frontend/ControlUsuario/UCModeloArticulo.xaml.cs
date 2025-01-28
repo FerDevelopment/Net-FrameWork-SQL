@@ -54,7 +54,12 @@ namespace DI.Proyecto.Clase._2024.Frontend.ControlUsuario
 
         private void cbTipoArticulo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            _mvModeloArticulo.Filtrar();
+        }
 
+        private void TextBuscarTipo_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            _mvModeloArticulo.Filtrar();
         }
     }
 }

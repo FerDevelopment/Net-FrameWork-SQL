@@ -17,13 +17,15 @@
             <TextBlock Text="Listado de modelos de articulo" Margin="20" FontSize="20"/>
             <StackPanel Orientation="Horizontal" Grid.Row="1">
                 <TextBlock Text="Flitrado por Tipo" Margin="20 10 10 10"  VerticalAlignment="Center"/>
-                <ComboBox x:Name="cbTipoArticulo" Style="{StaticResource MaterialDesignFilledComboBox}" mat:HintAssist.Hint="--Seleccina un tipo--" Margin="10" ItemsSource="{Binding listaTipos}" DisplayMemberPath="nombre" SelectionChanged="cbTipoArticulo_SelectionChanged" SelectedItem="{Binding tipoSeleccionado}"/>
+                <ComboBox x:Name="cbTipoArticulo" Style="{StaticResource MaterialDesignFilledComboBox}" mat:HintAssist.Hint="--Seleccina un tipo--" Margin="10" ItemsSource="{Binding listaTipos}" DisplayMemberPath="Nombre" SelectionChanged="cbTipoArticulo_SelectionChanged" SelectedItem="{Binding tipoSeleccionado}"/>
+                <TextBlock Text="Busca un artículo" VerticalAlignment="Center" Padding="15 0 15 0"/>
+                <TextBox Width="150" BorderThickness="1" Height="30"  x:Name="TextBuscarTipo" TextChanged="TextBuscarTipo_TextChanged" Text="{Binding modeloArticulo, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0"  mat:TextFieldAssist.HasClearButton="True"/>
             </StackPanel>
         </Grid>
 
         <Grid>
             <!-- el canuseraddrows es si queremos que al final de la tabla pueda añadir filas-->
-            <DataGrid x:Name="dgModeloArticulo" ItemsSource="{Binding listaModelos}" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="True" IsReadOnly="True" >
+            <DataGrid x:Name="dgModeloArticulo" ItemsSource="{Binding listaModelosFiltro}" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="True" IsReadOnly="True" >
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nombre del modelo" Binding="{Binding Nombre}" />
