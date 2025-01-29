@@ -72,16 +72,16 @@ namespace DI.Proyecto.Clase._2024
             pantallaCrearUser.ShowDialog();
         }
 
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            panelPrincipal.Children.Clear();
+        }
         private void btnListarModelos_Click(object sender, RoutedEventArgs e)
         {
             UCModeloArticulo uc =new UCModeloArticulo(mvModeloArticulo);
             panelPrincipal.Children.Clear();
             panelPrincipal.Children.Add(uc);
-        }
-
-        private void btnClear_Click(object sender, RoutedEventArgs e)
-        {
-            panelPrincipal.Children.Clear();
         }
 
         private void btnListarArticulos_Click(object sender, RoutedEventArgs e)

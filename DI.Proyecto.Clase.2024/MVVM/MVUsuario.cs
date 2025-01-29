@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace DI.Proyecto.Clase._2024.MVVM
 {
@@ -20,18 +21,36 @@ namespace DI.Proyecto.Clase._2024.MVVM
         private GrupoServicio grupoServicio;
         private ServicioGenerico<Tipousuario> tipoUsuario;
         private Usuario usu;
-
+        private List<Predicate<Usuario>> criterios;
+        private Predicate<Usuario> criterioBusquedaNombre;
+        private Predicate<object> predicadoFiltro;
+        private string _textoBusqueda;
+        private ListCollectionView _listaUsuarios;
         public IEnumerable<Departamento> listaDepartamentos { get { return Task.Run(dptoServicio.GetAllAsync).Result; } }
         public IEnumerable<Usuario> listaUsuarios { get { return Task.Run(usuarioServicio.GetAllAsync).Result; } }
         public IEnumerable<Grupo> listaGrupos { get { return Task.Run(grupoServicio.GetAllAsync).Result; } }
         public IEnumerable<Rol> listaRoles { get { return Task.Run(rolServicio.GetAllAsync).Result; } }
         public IEnumerable<Tipousuario> listaTipos { get { return Task.Run(tipoUsuario.GetAllAsync).Result; } }
 
+        public ListCollectionView listaUsuarioFiltro => _listaUsuarios;
         public Usuario usuario
         {
             get { return usu; }
             set { usu = value; OnPropertyChanged(nameof(usuario)); }
         }
+        public string textoBusqueda
+        {
+            get { return _textoBusqueda; }
+            set
+            {
+                _textoBusqueda = value; OnPropertyChanged(nameof(textoBusqueda));
+                if (_textoBusqueda == null)
+                {
+                    _textoBusqueda = "";
+                }
+            }
+        }
+
 
         public bool guarda { get { return Task.Run(() => Update(usuario)).Result; } }
         public bool borrar { get { return Task.Run(() => Delete(usuario)).Result; } }
@@ -52,7 +71,41 @@ namespace DI.Proyecto.Clase._2024.MVVM
             grupoServicio = new GrupoServicio(contexto);
             tipoUsuario = new ServicioGenerico<Tipousuario>(contexto);
             servicio = usuarioServicio;
+            criterios = new List<Predicate<Usuario>>();
+            predicadoFiltro = new Predicate<object>(FiltroCriterios);
+            InicializaCriterios();
+
+
+        }
+
+        private void AddCriterios()
+        {
             
+            if (!string.IsNullOrEmpty(textoBusqueda))
+            {
+                criterios.Add(criterioBusquedaNombre);
+            }
+        }
+
+        public void Filtrar()
+        {
+            AddCriterios();
+            listaUsuarioFiltro.Filter = predicadoFiltro;
+        }
+        private bool FiltroCriterios(object item)
+        {
+            bool correcto = true;
+            Usuario usuario = (Usuario)item;
+            if (criterios != null)
+            {
+                correcto = criterios.TrueForAll(x => x(usuario));
+            }
+            return correcto;
+        }
+        private void InicializaCriterios()
+        {
+            
+           criterioBusquedaNombre  = new Predicate<Usuario>(u => u.Nombre != null && ((u.Nombre.ToLower() +" "+ u.Apellido1.ToLower()).Contains(textoBusqueda.ToLower())));
         }
     }
 }
