@@ -27,11 +27,15 @@ namespace DI.Proyecto.Clase._2024.MVVM
         private string _textoBusqueda;
         private ListCollectionView _listaUsuarios;
         public IEnumerable<Departamento> listaDepartamentos { get { return Task.Run(dptoServicio.GetAllAsync).Result; } }
-        public IEnumerable<Usuario> listaUsuarios { get { return Task.Run(usuarioServicio.GetAllAsync).Result; } }
+       
         public IEnumerable<Grupo> listaGrupos { get { return Task.Run(grupoServicio.GetAllAsync).Result; } }
         public IEnumerable<Rol> listaRoles { get { return Task.Run(rolServicio.GetAllAsync).Result; } }
         public IEnumerable<Tipousuario> listaTipos { get { return Task.Run(tipoUsuario.GetAllAsync).Result; } }
 
+        private IEnumerable<Usuario> _listaUsuariosB
+        {
+            get { return Task.Run(usuarioServicio.GetAllAsync).Result; }
+        }
         public ListCollectionView listaUsuarioFiltro => _listaUsuarios;
         public Usuario usuario
         {
@@ -59,10 +63,10 @@ namespace DI.Proyecto.Clase._2024.MVVM
 
         {
             contexto = context;
-            Inicializa();
+
         }
 
-        public void Inicializa()
+        public async Task Inicializa()
         {
             usu = new Usuario();
             usuarioServicio = new UsuarioServicio(contexto);
@@ -73,6 +77,7 @@ namespace DI.Proyecto.Clase._2024.MVVM
             servicio = usuarioServicio;
             criterios = new List<Predicate<Usuario>>();
             predicadoFiltro = new Predicate<object>(FiltroCriterios);
+            _listaUsuarios= new ListCollectionView(_listaUsuariosB.ToList());
             InicializaCriterios();
 
 
@@ -80,15 +85,18 @@ namespace DI.Proyecto.Clase._2024.MVVM
 
         private void AddCriterios()
         {
-            
-            if (!string.IsNullOrEmpty(textoBusqueda))
+
+            if (!listaUsuarioFiltro.Contains(criterioBusquedaNombre))
             {
                 criterios.Add(criterioBusquedaNombre);
+
             }
+
+
         }
 
         public void Filtrar()
-        {
+        { 
             AddCriterios();
             listaUsuarioFiltro.Filter = predicadoFiltro;
         }

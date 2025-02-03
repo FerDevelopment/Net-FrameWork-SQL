@@ -35,17 +35,22 @@ namespace DI.Proyecto.Clase._2024
             contexto = context;
             usuarioLogin = usu;
             nameOnTop.Text=usu.ToString();
-            Inicializa();
+
+            IniciarMVs();
         }
-        public void Inicializa()
+    
+
+
+        private async Task IniciarMVs()
         {
             mvModeloArticulo = new MVModeloArticulo(contexto);
-            mvCrearArticulo = new MVArticulo(contexto);
+            await mvModeloArticulo.Inicializa();
             mvCrearUsuario = new MVUsuario(contexto);
-
+            await mvCrearUsuario.Inicializa();
+            mvCrearArticulo = new MVArticulo(contexto);
+            await mvCrearArticulo.Inicializa();
 
         }
-
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
@@ -97,5 +102,8 @@ namespace DI.Proyecto.Clase._2024
             panelPrincipal.Children.Clear();
             panelPrincipal.Children.Add(uc);
         }
+
+      
+
     }
 }

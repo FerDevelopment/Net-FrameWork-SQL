@@ -64,5 +64,15 @@ namespace DI.Proyecto.Clase._2024.Frontend.ControlUsuario
 
             }
         }
+
+        private void TextBuscarNombre_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            _crearArticulo.Filtrar();
+        }
+
+
+
+      
+
     }
 }

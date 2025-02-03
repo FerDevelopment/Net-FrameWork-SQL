@@ -81,10 +81,9 @@ namespace DI.Proyecto.Clase._2024.MVVM
 
         {
             contexto = context;
-            Inicializa();
         }
 
-        public async void Inicializa()
+        public async Task Inicializa()
         {
 
             modeloArticuloServicio = new ModeloArticuloServicio(contexto);
@@ -92,7 +91,8 @@ namespace DI.Proyecto.Clase._2024.MVVM
 
             modelo = new Modeloarticulo();
             servicio = modeloArticuloServicio;
-            _listaModelos = new ListCollectionView((await modeloArticuloServicio.GetAllAsync()).ToList());
+           
+            _listaModelos = new ListCollectionView(listaModelos.ToList());
 
             criterios = new List<Predicate<Modeloarticulo>>();
             predicadoFiltro = new Predicate<object>(FiltroCriterios);
