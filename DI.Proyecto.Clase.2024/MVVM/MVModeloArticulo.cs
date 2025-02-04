@@ -92,7 +92,7 @@ namespace DI.Proyecto.Clase._2024.MVVM
             modelo = new Modeloarticulo();
             servicio = modeloArticuloServicio;
            
-            _listaModelos = new ListCollectionView(listaModelos.ToList());
+            _listaModelos = new ListCollectionView((await modeloArticuloServicio.GetAllAsync()).ToList());
 
             criterios = new List<Predicate<Modeloarticulo>>();
             predicadoFiltro = new Predicate<object>(FiltroCriterios);

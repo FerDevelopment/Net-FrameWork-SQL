@@ -12,7 +12,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
 
@@ -40,7 +40,8 @@
             CanUserAddRows="False"
             ColumnWidth="*"
             IsReadOnly="True"
-            ItemsSource="{Binding listaUsuarioFiltro}">
+            ItemsSource="{Binding listaUsuarioFiltro}"
+            VerticalScrollBarVisibility="Visible">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding TipoNavigation.Nombre}" Header="Tipo" />
                 <DataGridTextColumn Binding="{Binding RolNavigation.Nombre}" Header="Rol" />

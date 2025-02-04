@@ -32,10 +32,7 @@ namespace DI.Proyecto.Clase._2024.MVVM
         public IEnumerable<Rol> listaRoles { get { return Task.Run(rolServicio.GetAllAsync).Result; } }
         public IEnumerable<Tipousuario> listaTipos { get { return Task.Run(tipoUsuario.GetAllAsync).Result; } }
 
-        private IEnumerable<Usuario> _listaUsuariosB
-        {
-            get { return Task.Run(usuarioServicio.GetAllAsync).Result; }
-        }
+        
         public ListCollectionView listaUsuarioFiltro => _listaUsuarios;
         public Usuario usuario
         {

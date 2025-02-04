@@ -14,6 +14,8 @@ namespace DI.Proyecto.Clase._2024.Frontend.ControlUsuario
     public partial class UCArticulo : UserControl
     {
         private MVArticulo _crearArticulo;
+
+
         public UCArticulo()
         {
             InitializeComponent();
@@ -67,12 +69,17 @@ namespace DI.Proyecto.Clase._2024.Frontend.ControlUsuario
 
         private void TextBuscarNombre_TextChanged(object sender, TextChangedEventArgs e)
         {
+           
+        }
+
+        private void btFiltrar_Click(object sender, RoutedEventArgs e)
+        {
             _crearArticulo.Filtrar();
         }
 
-
-
-      
-
+        private void btLimpiarFiltros_Click(object sender, RoutedEventArgs e)
+        {
+            _crearArticulo.LimpiarFiltros();
+        }
     }
 }

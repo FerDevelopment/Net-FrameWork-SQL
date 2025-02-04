@@ -42,7 +42,7 @@ namespace DI.Proyecto.Clase._2024.Frontend.Dialogos
             {
 
                 MainWindow ventanaPrincipal = new MainWindow(contexto,usuarioServicio.usuLogin);
-               ventanaPrincipal.IniciarMVs();
+              
                 ventanaPrincipal.Show();
                 this.Close();
             }

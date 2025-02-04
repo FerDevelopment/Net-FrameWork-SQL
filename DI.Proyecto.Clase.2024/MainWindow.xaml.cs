@@ -35,13 +35,14 @@ namespace DI.Proyecto.Clase._2024
             contexto = context;
             usuarioLogin = usu;
             nameOnTop.Text=usu.ToString();
-
-    
+            _ = IniciarMVs();
+           
         }
-    
+
+        
 
 
-        public async void IniciarMVs()
+        public async Task IniciarMVs()
         {
             mvModeloArticulo = new MVModeloArticulo(contexto);
             await mvModeloArticulo.Inicializa();

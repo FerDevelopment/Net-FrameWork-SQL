@@ -20,19 +20,48 @@
             <TextBlock
                 Padding="15,0,15,0"
                 VerticalAlignment="Center"
-                Text="Nombre y Apellidos: " />
-            <TextBox
-                x:Name="TextBuscarNombre"
-                Grid.Row="0"
-                Grid.Column="1"
+                Text="Fecha Inicial: " />
+
+            <DatePicker
+                x:Name="dpfechaInicial"
+                SelectedDate="{Binding fechaInicial}"
+                Style="{StaticResource MahApps.Styles.DatePicker}"
+                Text="{Binding fechaInicial}" />
+            <TextBlock
+                Padding="15,0,15,0"
+                VerticalAlignment="Center"
+                Text="Fecha Final: " />
+
+            <DatePicker
+                x:Name="dpfechaFinal"
+                SelectedDate="{Binding fechaFinal}"
+                Style="{StaticResource MahApps.Styles.DatePicker}"
+                Text="{Binding fechaFinal}" />
+
+            <TextBlock
+                Padding="15,0,15,0"
+                VerticalAlignment="Center"
+                Text="Espacio: " />
+
+            <ComboBox
+                x:Name="cbespacio"
                 Width="150"
-                Height="30"
-                Margin="0,10,0,0"
-                HorizontalAlignment="Center"
-                mat:TextFieldAssist.HasClearButton="True"
-                BorderThickness="1"
-                Text="{Binding nombreBuscado, UpdateSourceTrigger=PropertyChanged}"
-                TextChanged="TextBuscarNombre_TextChanged" />
+                DisplayMemberPath="Nombre"
+                ItemsSource="{Binding listaEspacios}"
+                SelectedItem="{Binding espacioSeleccionado}"
+                Style="{StaticResource MahApps.Styles.ComboBox}" />
+
+            <Button
+                x:Name="btFiltrar"
+                Click="btFiltrar_Click"
+                Content="Filtrar"
+                Style="{StaticResource MahApps.Styles.Button}" />
+            <Button
+                x:Name="btLimpiarFiltros"
+                Click="btLimpiarFiltros_Click"
+                Content="LimpiarFiltros"
+                Style="{StaticResource MahApps.Styles.Button}" />
+
         </StackPanel>
         <DataGrid
             x:Name="dgCrearArticulo"
@@ -41,7 +70,7 @@
             CanUserAddRows="False"
             ColumnWidth="*"
             IsReadOnly="True"
-            ItemsSource="{Binding listaArmarios}">
+            ItemsSource="{Binding listaArticulosFiltro}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Numserie}" Header="Número de serie" />
                 <DataGridTextColumn Binding="{Binding Estado}" Header="Estado" />

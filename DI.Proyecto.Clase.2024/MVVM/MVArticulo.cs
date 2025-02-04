@@ -20,11 +20,17 @@ namespace DI.Proyecto.Clase._2024.MVVM
         private String _nombreBuscado;
         private ListCollectionView _listaArticulos;
 
-        private List<Predicate<Modeloarticulo>> criterios;
-        //Lista de criterios para el filtrado de tabla
-        private Predicate<Modeloarticulo> criterioBusqueda;
+        private DateOnly _fechaInicial;
+        private DateOnly _fechaFinal;
+        private Espacio _espacioSeleccionado;
 
-    
+
+        private List<Predicate<Articulo>> criterios;
+        //Lista de criterios para el filtrado de tabla
+        private Predicate<Articulo> criterioFechas;
+        private Predicate<Articulo> criterioEspacio;
+
+
         //Criterios de tipo de artic ulo. FIltrra por el tipo de articulo
         private Predicate<object> predicadoFiltro;
 
@@ -36,6 +42,36 @@ namespace DI.Proyecto.Clase._2024.MVVM
         public IEnumerable<Articulo> listaArmarios { get { return Task.Run(articuloServicio.GetAllAsync).Result; } }
         public IEnumerable<String> listaEstados { get { return estados; } }
 
+
+        public DateOnly fechaInicial
+        {
+            get { return _fechaInicial; }
+            set
+            {
+                _fechaInicial = value; OnPropertyChanged(nameof(fechaInicial));
+
+            }
+        }
+        public DateOnly fechaFinal
+        {
+            get { return _fechaFinal; }
+            set
+            {
+                _fechaFinal = value; OnPropertyChanged(nameof(fechaFinal));   
+
+            }
+        }
+
+
+        public Espacio espacioSeleccionado
+        {
+            get { return _espacioSeleccionado; }
+            set
+            {
+                _espacioSeleccionado = value; OnPropertyChanged(nameof(espacioSeleccionado));
+                
+            }
+        }
 
         public string nombreBuscado
 
@@ -83,9 +119,12 @@ namespace DI.Proyecto.Clase._2024.MVVM
             usuarioServicio = new UsuarioServicio(contexto);
             modeloArticuloServicio = new ModeloArticuloServicio(contexto);
             articuloServicio = new ArticuloServicio(contexto);
+            _listaArticulos = new ListCollectionView( (await articuloServicio.GetAllAsync()).ToList() );
             articulo = new Articulo();
             articulo.Fechaalta = DateTime.Now;
             servicio = articuloServicio;
+            criterios = new List<Predicate<Articulo>>();
+            predicadoFiltro = new Predicate<object>(FiltroCriterios);
             InicializaCriterios();
 
 
@@ -96,28 +135,42 @@ namespace DI.Proyecto.Clase._2024.MVVM
             AddCriterios();
             listaArticulosFiltro.Filter = predicadoFiltro;
         }
+
+        public void LimpiarFiltros()
+        {
+            criterios.Clear();
+            listaArticulosFiltro.Filter= predicadoFiltro;
+            InicializaCriterios();
+        }
         private void InicializaCriterios()
         {
-           
-           // criterioBusqueda = new Predicate<Modeloarticulo>(m => m.Nombre != null && m.Nombre.ToLower().StartsWith(textoBusqueda.ToLower()));
+            espacioSeleccionado = null;
+            _fechaFinal = 
+               DateOnly.FromDateTime( articuloServicio.GetFechaFinal());
+
+            _fechaInicial = DateOnly.FromDateTime(articuloServicio.GetFechaInicial
+                ());
+
+            criterioFechas = new Predicate<Articulo>(a => a.Fechaalta!= null && fechaInicial.ToDateTime(TimeOnly.MinValue)<=a.Fechaalta && a.Fechaalta <= fechaFinal.ToDateTime(TimeOnly.MinValue));
+            criterioEspacio = new Predicate<Articulo>(a => a.EspacioNavigation != null && a.EspacioNavigation == espacioSeleccionado);
         }
         private bool FiltroCriterios(object item)
         {
             bool correcto = true;
-            Modeloarticulo modelo = (Modeloarticulo)item;
+            Articulo articulo = (Articulo)item;
             if (criterios != null)
             {
-                correcto = criterios.TrueForAll(x => x(modelo));
+                correcto = criterios.TrueForAll(x => x(articulo));
             }
             return correcto;
         }
         private void AddCriterios()
         {
-          
-            if (!string.IsNullOrEmpty(_nombreBuscado))
-            {
-                criterios.Add(criterioBusqueda);
-            }
+            
+            criterios.Add(criterioFechas);
+            
+            criterios.Add(criterioEspacio);
+            
         }
 
     }
