@@ -77,7 +77,7 @@ namespace DI.Proyecto.Clase._2024.MVVM
             servicio = usuarioServicio;
             criterios = new List<Predicate<Usuario>>();
             predicadoFiltro = new Predicate<object>(FiltroCriterios);
-            _listaUsuarios= new ListCollectionView(_listaUsuariosB.ToList());
+            _listaUsuarios= new ListCollectionView( (await usuarioServicio.GetAllAsync()).ToList());
             InicializaCriterios();
 
 

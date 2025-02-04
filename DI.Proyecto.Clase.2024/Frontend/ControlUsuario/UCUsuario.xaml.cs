@@ -31,11 +31,23 @@ namespace DI.Proyecto.Clase._2024.Frontend.ControlUsuario
 
         public UCUsuario(MVUsuario mv)
         {
-            InitializeComponent();
+
+            _ = GeroMeTieneHastaLaPolla(mv);
+
+            
+
+
+        }
+
+        public async Task GeroMeTieneHastaLaPolla(MVUsuario mv)
+        {
+
             _mvCrearUsuario = mv;
             DataContext = _mvCrearUsuario;
-            
+
+            InitializeComponent();
         }
+
 
         private void mItemBorrar_Click(object sender, RoutedEventArgs e)
         {

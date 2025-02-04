@@ -36,12 +36,12 @@ namespace DI.Proyecto.Clase._2024
             usuarioLogin = usu;
             nameOnTop.Text=usu.ToString();
 
-            IniciarMVs();
+    
         }
     
 
 
-        private async Task IniciarMVs()
+        public async void IniciarMVs()
         {
             mvModeloArticulo = new MVModeloArticulo(contexto);
             await mvModeloArticulo.Inicializa();
@@ -99,6 +99,7 @@ namespace DI.Proyecto.Clase._2024
         private void btnListarUsuarios_Click(object sender, RoutedEventArgs e)
         {
             UCUsuario uc = new UCUsuario(mvCrearUsuario);
+
             panelPrincipal.Children.Clear();
             panelPrincipal.Children.Add(uc);
         }
