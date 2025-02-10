@@ -23,16 +23,18 @@ namespace DI.Proyecto.Clase._2024.MVVM
         private Usuario usu;
         private List<Predicate<Usuario>> criterios;
         private Predicate<Usuario> criterioBusquedaNombre;
+        private Predicate<Usuario> criterioGrupo;
+        private Predicate<Usuario> criterioSalidas;
         private Predicate<object> predicadoFiltro;
-        private string _textoBusqueda;
+        private string _textoBusqueda ="";
         private ListCollectionView _listaUsuarios;
         public IEnumerable<Departamento> listaDepartamentos { get { return Task.Run(dptoServicio.GetAllAsync).Result; } }
-       
+
         public IEnumerable<Grupo> listaGrupos { get { return Task.Run(grupoServicio.GetAllAsync).Result; } }
         public IEnumerable<Rol> listaRoles { get { return Task.Run(rolServicio.GetAllAsync).Result; } }
         public IEnumerable<Tipousuario> listaTipos { get { return Task.Run(tipoUsuario.GetAllAsync).Result; } }
 
-        
+
         public ListCollectionView listaUsuarioFiltro => _listaUsuarios;
         public Usuario usuario
         {
@@ -52,6 +54,26 @@ namespace DI.Proyecto.Clase._2024.MVVM
             }
         }
 
+        private Grupo _grupoSeleccionado;
+        public Grupo grupoSeleccionado
+        {
+            get { return _grupoSeleccionado; }
+            set
+            {
+                _grupoSeleccionado = value; OnPropertyChanged(nameof(grupoSeleccionado));
+            }
+        }
+        private Boolean _check = false;
+
+        public Boolean check
+        {
+            get { return _check; }
+            set
+            {
+                _check = value; OnPropertyChanged(nameof(check));
+            }
+        }
+
 
         public bool guarda { get { return Task.Run(() => Update(usuario)).Result; } }
         public bool borrar { get { return Task.Run(() => Delete(usuario)).Result; } }
@@ -68,13 +90,13 @@ namespace DI.Proyecto.Clase._2024.MVVM
             usu = new Usuario();
             usuarioServicio = new UsuarioServicio(contexto);
             rolServicio = new RolServicio(contexto);
-            dptoServicio = new DptoServicio(contexto);  
+            dptoServicio = new DptoServicio(contexto);
             grupoServicio = new GrupoServicio(contexto);
             tipoUsuario = new ServicioGenerico<Tipousuario>(contexto);
             servicio = usuarioServicio;
             criterios = new List<Predicate<Usuario>>();
             predicadoFiltro = new Predicate<object>(FiltroCriterios);
-            _listaUsuarios= new ListCollectionView( (await usuarioServicio.GetAllAsync()).ToList());
+            _listaUsuarios = new ListCollectionView((await usuarioServicio.GetAllAsync()).ToList());
             InicializaCriterios();
 
 
@@ -83,17 +105,36 @@ namespace DI.Proyecto.Clase._2024.MVVM
         private void AddCriterios()
         {
 
-            if (!listaUsuarioFiltro.Contains(criterioBusquedaNombre))
+            if (String.IsNullOrEmpty(textoBusqueda))
             {
                 criterios.Add(criterioBusquedaNombre);
 
             }
 
+            if (grupoSeleccionado != null)
+            {
+                criterios.Add(criterioGrupo);
+
+            }
+
+            if (!criterios.Contains(criterioSalidas) && check)
+            {
+                criterios.Add(criterioSalidas);
+            }
+                else
+                {
+                if (!check)
+                {
+                    criterios.Remove(criterioSalidas);
+                }
+                    
+                }
+
 
         }
 
         public void Filtrar()
-        { 
+        {
             AddCriterios();
             listaUsuarioFiltro.Filter = predicadoFiltro;
         }
@@ -109,8 +150,10 @@ namespace DI.Proyecto.Clase._2024.MVVM
         }
         private void InicializaCriterios()
         {
-            
-           criterioBusquedaNombre  = new Predicate<Usuario>(u => u.Nombre != null && ((u.Nombre.ToLower() +" "+ u.Apellido1.ToLower()).Contains(textoBusqueda.ToLower())));
+
+            criterioBusquedaNombre = new Predicate<Usuario>(u => u.Nombre != null && ((u.Nombre.ToLower() + " " + u.Apellido1.ToLower()).Contains(textoBusqueda.ToLower())));
+            criterioGrupo = new Predicate<Usuario>(u => u.Grupo != null && u.GrupoNavigation == grupoSeleccionado);
+            criterioSalidas = new Predicate<Usuario>(u => u.Salida != null && u.Salida.Count >= 10);
         }
     }
 }

@@ -26,6 +26,8 @@ namespace DI.Proyecto.Clase._2024.MVVM
         //Objeto que accede a la tabla de modeloArticullo
         private ListCollectionView _listaModelos;
 
+        private Boolean _check;
+
 
         private Tipoarticulo _tipoarticulo;
         //Lista de criterios 
@@ -40,6 +42,7 @@ namespace DI.Proyecto.Clase._2024.MVVM
         private Predicate<Modeloarticulo> criterioBusqueda;
 
         private Predicate<Modeloarticulo> criterioTipo;
+        private Predicate<Modeloarticulo> criterioCantidad;
         //Criterios de tipo de artic ulo. FIltrra por el tipo de articulo
         private Predicate<object> predicadoFiltro;
         //Objeto qeu se asoica a la propiedad filtrar de la lista y al metodo flitrado 
@@ -54,6 +57,12 @@ namespace DI.Proyecto.Clase._2024.MVVM
         {
             get { return modelo; }
             set { modelo = value; OnPropertyChanged(nameof(modeloArticulo)); }
+        }
+
+        public Boolean check
+        {
+            get { return _check; }
+            set { _check = value; OnPropertyChanged(nameof(check));}
         }
 
         public string textoBusqueda
@@ -111,11 +120,27 @@ namespace DI.Proyecto.Clase._2024.MVVM
             {
                 criterios.Add(criterioBusqueda);
             }
+
+            if(check== false && criterios.Contains(criterioCantidad))
+            {
+                criterios.Remove(criterioCantidad);
+
+            }
+            else
+            {
+                if (check == true)
+                {
+                    criterios.Add(criterioCantidad);
+                }
+                
+            }
         }
         private void InicializaCriterios()
         {
             criterioTipo = new Predicate<Modeloarticulo>(m => m.TipoNavigation != null && m.TipoNavigation.Equals(tipoSeleccionado));
             criterioBusqueda = new Predicate<Modeloarticulo>(m => m.Nombre != null && m.Nombre.ToLower().StartsWith(textoBusqueda.ToLower()));
+            
+            criterioCantidad= new Predicate<Modeloarticulo>(m => m.Articulos!= null && m.Articulos.Count()>=10);
         }
 
         public void Filtrar()

@@ -32,6 +32,26 @@
                 BorderThickness="1"
                 Text="{Binding textoBusqueda, UpdateSourceTrigger=PropertyChanged}"
                 TextChanged="TextBuscarNombre_TextChanged" />
+
+            <TextBlock
+                Padding="15,0,15,0"
+                VerticalAlignment="Center"
+                Text="Grupo: " />
+            <ComboBox
+                x:Name="cbGrupo"
+                Width="100"
+                DisplayMemberPath="Nombre"
+                ItemsSource="{Binding listaGrupos}"
+                SelectedItem="{Binding grupoSeleccionado}"
+                SelectionChanged="cbGrupo_SelectionChanged" />
+            <TextBlock
+                Padding="15,0,15,0"
+                VerticalAlignment="Center"
+                Text="&gt;10 Salidas " />
+            <CheckBox
+                Checked="CheckBox_Click"
+                IsChecked="{Binding check}"
+                Unchecked="CheckBox_Click" />
         </StackPanel>
         <DataGrid
             x:Name="dgCrearUsuario"

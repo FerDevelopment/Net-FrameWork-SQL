@@ -61,5 +61,10 @@ namespace DI.Proyecto.Clase._2024.Frontend.ControlUsuario
         {
             _mvModeloArticulo.Filtrar();
         }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            _mvModeloArticulo.Filtrar();
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace DI.Proyecto.Clase._2024.Frontend.ControlUsuario
     public partial class UCUsuario : UserControl
     {
         MVUsuario _mvCrearUsuario;
-       
+
 
 
         public UCUsuario(MVUsuario mv)
@@ -70,6 +70,16 @@ namespace DI.Proyecto.Clase._2024.Frontend.ControlUsuario
         }
 
         private void TextBuscarNombre_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            _mvCrearUsuario.Filtrar();
+        }
+
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            _mvCrearUsuario.Filtrar();
+        }
+
+        private void cbGrupo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _mvCrearUsuario.Filtrar();
         }

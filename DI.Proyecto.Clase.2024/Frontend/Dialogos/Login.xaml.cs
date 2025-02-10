@@ -33,12 +33,13 @@ namespace DI.Proyecto.Clase._2024.Frontend.Dialogos
             {
                 InitializeComponent();
                 usuarioServicio = new UsuarioServicio(contexto);
+                txtUsername.Focus();
             }
         }
 
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (await usuarioServicio.Login(txtUsername.Text, passClaveAcceso.Password))
+            if (await usuarioServicio.Login(txtUsername.Text.ToLower(), passClaveAcceso.Password))
             {
 
                 MainWindow ventanaPrincipal = new MainWindow(contexto,usuarioServicio.usuLogin);

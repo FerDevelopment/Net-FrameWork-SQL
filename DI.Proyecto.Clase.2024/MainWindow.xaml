@@ -30,7 +30,7 @@
             </Button>
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
-    <DockPanel>
+    <DockPanel Background="Black">
         <Grid DockPanel.Dock="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -67,6 +67,14 @@
                         Header="Articulo Nuevo">
                         <MenuItem.Icon>
                             <mat:PackIcon Kind="Calendar" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem
+                        x:Name="btnListaTipoArticulos"
+                        Click="btnListaTipoArticulos_Click"
+                        Header="Lista Tipo Articulos">
+                        <MenuItem.Icon>
+                            <mat:PackIcon Kind="FormatListBulletedType" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Editar">
@@ -127,6 +135,14 @@
                             Header="Lista">
                             <MenuItem.Icon>
                                 <mat:PackIcon Kind="ListBoxOutline" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem
+                            x:Name="btnListaAlumnos"
+                            Click="btnListaAlumnos_Click"
+                            Header="ListaAlumnos">
+                            <MenuItem.Icon>
+                                <mat:PackIcon Kind="EmoticonManProfile" />
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>

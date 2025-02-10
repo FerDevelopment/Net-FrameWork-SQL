@@ -4,6 +4,7 @@ using DI.Proyecto.Clase._2024.Frontend.ControlUsuario;
 using DI.Proyecto.Clase._2024.Frontend.Dialogos;
 using DI.Proyecto.Clase._2024.MVVM;
 using MahApps.Metro.Controls;
+using MaterialDesignThemes.Wpf;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -105,7 +106,18 @@ namespace DI.Proyecto.Clase._2024
             panelPrincipal.Children.Add(uc);
         }
 
-      
+        private void btnListaAlumnos_Click(object sender, RoutedEventArgs e)
+        {
+            UCAlumnoTree uc = new UCAlumnoTree(mvCrearUsuario);
+            panelPrincipal.Children.Clear();
+            panelPrincipal.Children.Add(uc);
+        }
 
+        private void btnListaTipoArticulos_Click(object sender, RoutedEventArgs e)
+        {
+            UCTipoArticulo uc = new UCTipoArticulo(mvModeloArticulo);
+            panelPrincipal.Children.Clear();
+            panelPrincipal.Children.Add(uc);
+        }
     }
 }
