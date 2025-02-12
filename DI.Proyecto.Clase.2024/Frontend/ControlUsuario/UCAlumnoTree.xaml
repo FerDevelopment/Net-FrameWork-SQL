@@ -13,7 +13,11 @@
     <DockPanel>
         <Grid Width="300" DockPanel.Dock="Left">
 
-            <TreeView x:Name="treeAlumnos" ItemsSource="{Binding listaGrupos}">
+            <TreeView
+                x:Name="treeAlumnos"
+                ItemsSource="{Binding listaGrupos}"
+                SelectedItemChanged="treeAlumnos_SelectedItemChanged">
+
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type ent:Grupo}" ItemsSource="{Binding Usuarios}">
                         <StackPanel Orientation="Horizontal">
@@ -52,6 +56,22 @@
             </TreeView>
 
         </Grid>
-        <Grid DockPanel.Dock="Bottom" />
+        <Grid DockPanel.Dock="Right">
+
+            <!--  Para los prestamos  -->
+            <DataGrid
+                x:Name="dgPrestamos"
+                AutoGenerateColumns="False"
+                ColumnWidth="*">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding UsuarioNavigation}" Header="Nombre del usuario" />
+                    <DataGridTextColumn Binding="{Binding ArticuloNavigation.ModeloNavigation.Nombre}" Header="Nombre del modelo" />
+                    <DataGridTextColumn Binding="{Binding ArticuloNavigation.Numserie}" Header="Numero de serie " />
+                    <DataGridTextColumn Binding="{Binding Fechadevolucion, StringFormat=dd-MM-yyyy}" Header="Fecha de devolución" />
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+        </Grid>
     </DockPanel>
 </UserControl>

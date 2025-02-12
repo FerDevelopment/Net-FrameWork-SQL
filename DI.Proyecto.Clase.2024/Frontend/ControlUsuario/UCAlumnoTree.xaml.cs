@@ -1,4 +1,5 @@
-﻿using DI.Proyecto.Clase._2024.MVVM;
+﻿using DI.Proyecto.Clase._2024.Backend.Modelo;
+using DI.Proyecto.Clase._2024.MVVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,15 @@ namespace DI.Proyecto.Clase._2024.Frontend.ControlUsuario
             _mvuser = mv;
             DataContext = mv;
             InitializeComponent();
+        }
+
+        private void treeAlumnos_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (treeAlumnos.SelectedItem != null && treeAlumnos.SelectedItem is Usuario)
+            {   
+
+                dgPrestamos.ItemsSource = ((Usuario)(treeAlumnos.SelectedItem)).Salida;
+            }
         }
     }
 }

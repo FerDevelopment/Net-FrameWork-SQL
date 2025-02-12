@@ -42,6 +42,10 @@ namespace DI.Proyecto.Clase._2024.MVVM
         public IEnumerable<Articulo> listaArmarios { get { return Task.Run(articuloServicio.GetAllAsync).Result; } }
         public IEnumerable<String> listaEstados { get { return estados; } }
 
+        public IEnumerable<Tipoarticulo> listaTipos
+        {
+            get { return Task.Run(new TipoArticuloServicio(contexto).GetAllAsync).Result; }
+        }
 
         public DateOnly fechaInicial
         {

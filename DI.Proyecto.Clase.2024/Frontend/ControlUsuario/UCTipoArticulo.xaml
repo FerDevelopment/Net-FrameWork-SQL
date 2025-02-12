@@ -7,13 +7,16 @@
     xmlns:local="clr-namespace:DI.Proyecto.Clase._2024.Frontend.ControlUsuario"
     xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="600"
+    d:DesignWidth="1200"
     mc:Ignorable="d">
     <DockPanel>
-        <Grid DockPanel.Dock="Left">
+        <Grid Width="500" DockPanel.Dock="Left">
 
-            <TreeView x:Name="treeAlumnos" ItemsSource="{Binding listaTipos}">
+            <TreeView
+                x:Name="treeTipoArticulo"
+                ItemsSource="{Binding listaTipos}"
+                SelectedItemChanged="treeTipoArticulo_SelectedItemChanged">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type ent:Tipoarticulo}" ItemsSource="{Binding Modeloarticulos}">
                         <StackPanel Orientation="Horizontal">
@@ -63,7 +66,143 @@
             </TreeView>
 
         </Grid>
-        <Grid DockPanel.Dock="Bottom" />
+        <Grid DockPanel.Dock="Right">
+
+            <Grid Background="Gray">
+                <StackPanel Grid.Row="1">
+                    <TextBlock
+                        Margin="20,10,0,0"
+                        FontSize="15"
+                        FontWeight="Black"
+                        Text="Los campos con asterisco son obligatorios" />
+                    <TextBlock
+                        Margin="30,30,0,0"
+                        FontSize="30"
+                        FontStyle="Italic"
+                        Foreground="DodgerBlue"
+                        Text="DATOS DEL ARTICULO" />
+                    <Separator Margin="15,-5,15,0" />
+
+                    <StackPanel Margin="60,20,60,0" Orientation="Horizontal">
+                        <ComboBox
+                            x:Name="cbModelo"
+                            Width="360"
+                            Margin="0,0,0,0"
+                            Padding="0,0,0,5"
+                            mat:HintAssist.Hint="Selecciona un modelo*"
+                            DisplayMemberPath="Nombre"
+                            FontSize="20"
+                            FontWeight="bold"
+                            ItemsSource="{Binding listaModelos}"
+                            SelectedItem="{Binding crearArticulo.ModeloNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                            Text="{Binding crearArticulo.ModeloNavigation.Nombre}" />
+
+                        <DatePicker
+                            x:Name="fecha"
+                            Width="360"
+                            Margin="60,0,0,0"
+                            Padding="0,0,0,5"
+                            mat:HintAssist.Hint="Selecciona una fecha"
+                            FontSize="20"
+                            SelectedDate="{Binding crearArticulo.Fechaalta, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                            Text="{Binding crearArticulo.Fechaalta}" />
+
+                    </StackPanel>
+
+                    <StackPanel Margin="60,20,60,0" Orientation="Horizontal">
+                        <ComboBox
+                            x:Name="cbEstado"
+                            Width="360"
+                            Margin="0,0,0,0"
+                            Padding="0,0,0,5"
+                            mat:HintAssist.Hint="Selecciona un estado"
+                            FontSize="20"
+                            ItemsSource="{Binding listaEstados}"
+                            SelectedItem="{Binding crearArticulo.Estado, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                            Text="{Binding crearArticulo.Estado}" />
+
+                        <ComboBox
+                            x:Name="cbUsuario"
+                            Width="360"
+                            Margin="60,0,0,0"
+                            Padding="0,0,0,5"
+                            mat:HintAssist.Hint="Selecciona un usuario*"
+                            FontSize="20"
+                            ItemsSource="{Binding listaUsuarios}"
+                            SelectedItem="{Binding crearArticulo.UsuarioaltaNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" />
+                    </StackPanel>
+                    <TextBox
+                        x:Name="numSerie"
+                        Margin="60,20,60,0"
+                        mat:HintAssist.Hint="Numero de Serie* (Debe de ser único)"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        MaxLength="45"
+                        Text="{Binding crearArticulo.Numserie, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" />
+
+                    <TextBlock
+                        Margin="30,50,0,0"
+                        FontSize="30"
+                        FontStyle="Italic"
+                        Foreground="DodgerBlue"
+                        Text="UBICACIÓN" />
+                    <Separator Margin="15,-5,15,0" />
+
+                    <StackPanel Margin="60,20,60,0" Orientation="Horizontal">
+                        <ComboBox
+                            x:Name="cbDepartamentos"
+                            Width="360"
+                            Margin="0,0,0,0"
+                            Padding="0,0,0,5"
+                            mat:HintAssist.Hint="Selecciona un departamento*"
+                            DisplayMemberPath="Nombre"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            ItemsSource="{Binding listaDepartamentos}"
+                            SelectedItem="{Binding crearArticulo.DepartamentoNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                            Text="{Binding crearArticulo.DepartamentoNavigation.Nombre}" />
+
+                        <ComboBox
+                            x:Name="cbEspacio"
+                            Width="360"
+                            Margin="60,0,0,0"
+                            Padding="0,0,0,5"
+                            mat:HintAssist.Hint="Selecciona un espacio*"
+                            DisplayMemberPath="Nombre"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            ItemsSource="{Binding listaEspacios}"
+                            SelectedItem="{Binding crearArticulo.EspacioNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                            Text="{Binding crearArticulo.EspacioNavigation.Nombre}" />
+
+                    </StackPanel>
+                    <ComboBox
+                        x:Name="cbArmario"
+                        Margin="60,15,60,0"
+                        Padding="0,0,0,5"
+                        mat:HintAssist.Hint="Selecciona un armario*"
+                        DisplayMemberPath="Nombre"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        ItemsSource="{Binding listaArmarios}"
+                        SelectedItem="{Binding crearArticulo.DentrodeNavigation, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" />
+
+                    <TextBox
+                        x:Name="observaciones"
+                        Margin="60,20,60,0"
+                        mat:HintAssist.Hint="Observaciones"
+                        FontSize="20"
+                        Foreground="Black"
+                        Text="{Binding crearArticulo.Observaciones, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" />
+
+                    <Grid Margin="0,30,0,0" HorizontalAlignment="Right" />
+                </StackPanel>
+
+
+            </Grid>
+
+        </Grid>
     </DockPanel>
 
 </UserControl>

@@ -115,7 +115,7 @@ namespace DI.Proyecto.Clase._2024
 
         private void btnListaTipoArticulos_Click(object sender, RoutedEventArgs e)
         {
-            UCTipoArticulo uc = new UCTipoArticulo(mvModeloArticulo);
+            UCTipoArticulo uc = new UCTipoArticulo(mvModeloArticulo, mvCrearArticulo);
             panelPrincipal.Children.Clear();
             panelPrincipal.Children.Add(uc);
         }

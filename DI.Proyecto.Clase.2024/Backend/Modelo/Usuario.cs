@@ -105,6 +105,6 @@ public partial class Usuario
     public virtual Tipousuario TipoNavigation { get; set; } = null!;
     public override string ToString()
     {
-        return Nombre + " " + Apellido1;
+        return Nombre + " " + Apellido1 +" "+ Apellido2;
     }
 }
